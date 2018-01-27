@@ -9,9 +9,9 @@ public class RotateHands : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		lftHand = transform.GetChild(0).gameObject; // +
-		lftHand.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(-90f, -179));
+		lftHand.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(90f, 179f));
 		ritHand = transform.GetChild(1).gameObject; // -
-		ritHand.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(90, 179));
+		ritHand.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(90f, 179f));
 
 		StartCoroutine(RotateLeftHands());
 		StartCoroutine(RotateRightHands());
@@ -37,14 +37,14 @@ public class RotateHands : MonoBehaviour {
 				// progress will equal 0 at startTime, 1 at endTime.
 				if (isItLeft)
 				{
-					lftHand.transform.rotation = Quaternion.LookRotation(Vector3.right);
-					lftHand.transform.rotation = Quaternion.Slerp(originalRotation, Quaternion.Euler(0f, 0f, 30), progress);
+					//lftHand.transform.rotation = Quaternion.LookRotation(Vector3.right);
+					lftHand.transform.rotation = Quaternion.Slerp(originalRotation, Quaternion.Euler(0f, 0f, -30), progress);
 					//lftHand.transform.eulerAngles = Vector3.Lerp(originalRotation.eulerAngles, new Vector3(0f, 0f, 30f), progress);
 					//lftHand.transform.RotateAround(lftHand.transform.position, new Vector3(0f, 0f, 1f), 1);//(originalRotation.eulerAngles - new Vector3(0f, 0f, 30f)).z / duration / Time.deltaTime);
 				}
 				else
 				{
-					lftHand.transform.rotation = Quaternion.LookRotation(Vector3.right);
+					//ritHand.transform.rotation = Quaternion.LookRotation(-Vector3.right);
 					ritHand.transform.rotation = Quaternion.Slerp(originalRotation, Quaternion.Euler(0f, 0f, -30f), progress);
 					//ritHand.transform.eulerAngles = Vector3.Lerp(originalRotation.eulerAngles, new Vector3(0f, 0f, -30f), progress);
 					//ritHand.transform.RotateAround(ritHand.transform.position, new Vector3(0f, 0f, -1f), 1);
@@ -54,7 +54,7 @@ public class RotateHands : MonoBehaviour {
 		}
 		if (isItLeft)
 		{
-			lftHand.transform.rotation = Quaternion.Euler(0f, 0f, 30f);
+			lftHand.transform.rotation = Quaternion.Euler(0f, 0f, -30f);
 		} else
 		{
 			ritHand.transform.rotation = Quaternion.Euler(0f, 0f, -30f);
