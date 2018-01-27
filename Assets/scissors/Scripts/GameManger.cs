@@ -9,7 +9,7 @@ public class GameManger : MonoBehaviour {
     public GameObject wire;
     public GameObject scissors;
     //[HideInInspector]
-    public int difficulty;
+    private int difficulty;
     [HideInInspector]
     public int win_Lose;
     
