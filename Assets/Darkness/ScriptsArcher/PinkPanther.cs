@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PinkPanther : MonoBehaviour {
 
-	public float minSpeed = -2f;
-	public float maxSpeed = 2f;
+	public Image filler;
+
+	float fullGameTime = 5f;
+
+	float minSpeed = -4f;
+	float maxSpeed = 4f;
+
+	float waitTime = 1f;
+
+	float startGameTime = 0f;
 
 	Rigidbody2D rb;
 
@@ -12,13 +21,27 @@ public class PinkPanther : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
 		StartCoroutine(PickRandomDirection(0));
+
+		startGameTime = Time.time;
 	}
 
-	// xORy :: 0 no problem
-	// :: 1 pos x
-	// :: 2 neg x
-	// :: 3 pos y
-	// :: 4 neg y
+	void Update()
+	{
+		filler.fillAmount = ((fullGameTime - (Time.time - startGameTime)) / fullGameTime);
+
+		if (filler.fillAmount <= 0)
+		{
+			print("done");
+			Time.timeScale = 0.01f;
+		}
+	}
+
+	// xORy
+	// :: 0 inside borders
+	// :: 1 pos +x
+	// :: 2 neg -x
+	// :: 3 pos +y
+	// :: 4 neg -y
 	IEnumerator PickRandomDirection(int xORy)
 	{
 		//transform.right = Random.insideUnitCircle;
@@ -44,7 +67,7 @@ public class PinkPanther : MonoBehaviour {
 			rb.velocity = new Vector2(Random.Range(minSpeed, maxSpeed), Random.Range(0f, maxSpeed));
 		}
 
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(waitTime);
 
 		if (transform.position.x >= 6.5f)
 		{
@@ -56,7 +79,7 @@ public class PinkPanther : MonoBehaviour {
 			yield break;
 		}
 
-		if (transform.position.y >= 3.5f)
+		if (transform.position.y >= 3f)
 		{
 			StartCoroutine(PickRandomDirection(3));
 			yield break;
