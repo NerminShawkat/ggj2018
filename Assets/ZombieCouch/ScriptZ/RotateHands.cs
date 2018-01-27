@@ -13,8 +13,9 @@ public class RotateHands : MonoBehaviour
 		lftHand = transform.GetChild(0).gameObject; // +
 		lftHand.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(-90f, -179f));
 		ritHand = transform.GetChild(1).gameObject; // -
+        ritHand.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(90f, 179f));
 
-	}
+    }
 
 	void Update()
 	{
