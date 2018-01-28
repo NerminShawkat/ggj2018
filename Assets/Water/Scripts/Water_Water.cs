@@ -22,7 +22,6 @@ public class Water_Water : TheLord {
     private void Start()
     {
         _difficulty = PlayerPrefs.GetInt("difficulty");
-        _difficulty = 3;
         if (_difficulty >= _waterHeights.Length) _difficulty = _waterHeights.Length - 1;
         _waterLevel = _waterHeights[_difficulty].Value;
         _requiredWaterLevel = _waterLevel;

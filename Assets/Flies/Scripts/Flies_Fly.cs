@@ -16,8 +16,13 @@ public class Flies_Fly : MonoBehaviour {
     SpriteRenderer _renderer;
     [SerializeField]
     CircleCollider2D _myCollider;
-    
-    
+    [SerializeField] Range RotateSpeed;
+    [SerializeField]private Range RadiusRange;
+    private float Radius;
+
+    private Vector2 _centre;
+    private float _angle;
+    float _direction = 1;
     private int _difficulty;
     public int Difficulty
     {
@@ -43,6 +48,9 @@ public class Flies_Fly : MonoBehaviour {
 
     private void Start()
     {
+        if (Random.Range(0, 100) > 50) _direction = -1;
+        Radius = RadiusRange.Value;
+        _centre = transform.position;
         Flies_FliesLord._OnGameOver.AddListener(OnGameOverHandler);
     }
     //private void Update()
@@ -66,7 +74,9 @@ public class Flies_Fly : MonoBehaviour {
 
     public void Die()
     {
+        _direction = 0;
         _renderer.sprite = _deadSprite;
+        Destroy(GetComponent<Animator>());
         Flies_FliesLord.KillFly();
         //StopCoroutine("GetLargerCoroutine");
         Destroy(_myCollider);
@@ -87,7 +97,16 @@ public class Flies_Fly : MonoBehaviour {
     }
     private void OnDestroy()
     {
-        Flies_FliesLord._OnGameOver.RemoveListener(OnGameOverHandler);
+        TheLord._OnGameOver.RemoveListener(OnGameOverHandler);
+    }
+    
+    private void Update()
+    {
+
+        _angle += RotateSpeed.Value * Time.deltaTime * _direction;
+
+        var offset = new Vector2(Mathf.Sin(_angle), Mathf.Cos(_angle)) * Radius;
+        transform.position = _centre + offset;
     }
 
 }

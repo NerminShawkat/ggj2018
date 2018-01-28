@@ -20,7 +20,7 @@ public class Flies_Timer : MonoBehaviour {
         _time = _times[difficulty];
         _remainingTime = _time;
         StartCoroutine("CountTime");
-        Flies_FliesLord._OnGameOver.AddListener((b)=>
+        TheLord._OnGameOver.AddListener((b)=>
         {
             StopCoroutine("CountTime");
         });
