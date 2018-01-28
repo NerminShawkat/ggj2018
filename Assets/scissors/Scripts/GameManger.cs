@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameManger : MonoBehaviour {
     public Text timeText;
+    public Image timerImage;
     private float timer;
     private float timerScale;
     public GameObject wire;
+    public GameObject full_Wire;
     public GameObject scissors;
     //[HideInInspector]
     private int difficulty;
@@ -29,6 +31,10 @@ public class GameManger : MonoBehaviour {
         timer = 6f;
         timeText.text = timer.ToString("F");
         win_Lose = 0;
+        int randomChiled = Random.Range(1, full_Wire.transform.childCount-1);
+        full_Wire.transform.GetChild(randomChiled).gameObject.AddComponent<BoxCollider2D>();
+        full_Wire.transform.GetChild(randomChiled).gameObject.tag="Target";
+        //full_Wire.transform.GetChild(randomChiled).gameObject.GetComponent<SpriteRenderer>().sprite =;
     }
     private void Start()
     {
@@ -44,6 +50,7 @@ public class GameManger : MonoBehaviour {
             {
                 timer -= Time.deltaTime;
                 timeText.text = timer.ToString("F");
+                timerImage.fillAmount = timer / timerScale;
                 timeText.color = Color.Lerp(Color.red, Color.white, timer / timerScale);
             }
             else
