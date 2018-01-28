@@ -26,9 +26,12 @@ public class Flies_Swatter : MonoBehaviour {
         //}
         if(!_isGameOver && Input.GetMouseButtonUp(0))
         {
-           // _finalPosition
+            // _finalPosition
+            //    _finalPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //    _finalPosition.z = 0;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            _finalPosition.z = 0;
+            //Ray ray = new Ray(_initialPosition, (_finalPosition - _initialPosition));
+            //_finalPosition.z = 0;
             
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             //Debug.DrawRay(_initialPosition, (_finalPosition - _initialPosition));
