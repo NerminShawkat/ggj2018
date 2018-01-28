@@ -42,7 +42,7 @@ public class PinkPanther : MonoBehaviour {
 			//print("hit");
 			hitTime = Time.time - startGameTime;
 
-			if (hitTime >= 1f)
+			if (hitTime >= 1.1f)
 			{
 				print("kill");
 				startPointingTime = hitTime = 0;

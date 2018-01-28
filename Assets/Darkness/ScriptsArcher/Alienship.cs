@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Alienship : MonoBehaviour {
 
+	public AudioSource pinkSfx;
+
 	public bool finished = false;
 	public Image filler;
 
@@ -47,14 +49,15 @@ public class Alienship : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		filler.fillAmount = ((fullGameTime - (Time.time - startGameTime)) / fullGameTime);
+		//filler.fillAmount = ((fullGameTime - (Time.time - startGameTime)) / fullGameTime);
 
-		if (filler.fillAmount <= 0)
-		{
-			print("done");
-			finished = true;
-			_isAlive = false;
-			//Time.timeScale = 0.01f;
-		}
+		//if (filler.fillAmount <= 0)
+		//{
+		//	print("done");
+		//	finished = true;
+		//	_isAlive = false;
+		//	pinkSfx.Stop();
+		//	//Time.timeScale = 0.01f;
+		//}
 	}
 }
