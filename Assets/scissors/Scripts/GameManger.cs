@@ -12,23 +12,25 @@ public class GameManger : MonoBehaviour {
     private int difficulty;
     [HideInInspector]
     public int win_Lose;
+
+    private int extraScore;
+    private int gameScore;
+    private int finalScore;
+    
     
     private void Awake()
     {
         difficulty = PlayerPrefs.GetInt("difficulty");
         wire.GetComponent<Wire_scissors>().set_Defculty(difficulty);
-        timer = 5f;
+        timer = 6f;
         timeText.text = timer.ToString("F");
         win_Lose = 0;
     }
     private void Start()
     {
-        if (difficulty > 3)
-        {
-            if (timer>1f)
-                timer -= (difficulty - 3);
-        }
+        timer -= difficulty;
         timerScale = timer;
+        gameScore = 100*difficulty;
     }
     private void Update()
     {
@@ -44,6 +46,7 @@ public class GameManger : MonoBehaviour {
             {
                 timer = 0;
                 timeText.text = timer.ToString("F");
+                wire.GetComponent<Wire_scissors>().CancelInvoke();
                 wire.GetComponent<Wire_scissors>().enabled = false;
                 scissors.GetComponent<Scissors_scissors>().enabled = false;
                 win_Lose = -1;
@@ -52,6 +55,9 @@ public class GameManger : MonoBehaviour {
         }if (win_Lose == 1)
         {
             scissors.GetComponent<Scissors_scissors>().enabled = false;
+            extraScore = (int)(timer /timerScale);
+            extraScore *= gameScore;
+            finalScore = gameScore + extraScore;
            // Application.LoadLevel("");
         }
     }

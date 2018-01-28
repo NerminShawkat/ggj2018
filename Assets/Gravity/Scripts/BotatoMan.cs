@@ -10,6 +10,7 @@ public class BotatoMan : MonoBehaviour {
     Rigidbody2D rigidbody2D;
     private int difficulty;
     private int win_Lose;
+    private int finalGameScore;
     private void Awake()
     {
         difficulty = PlayerPrefs.GetInt("difficulty");
@@ -24,7 +25,7 @@ public class BotatoMan : MonoBehaviour {
         if (difficulty < 1)
             difficulty = 1;
         rigidbody2D.gravityScale = -1*difficulty;
-
+        finalGameScore = 100 * difficulty;
     }
 
     private void FixedUpdate()

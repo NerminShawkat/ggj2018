@@ -28,14 +28,16 @@ public class Scissors_scissors : MonoBehaviour {
             cut = true;
             if (thereIsWire)
             {
+                wire.GetComponent<Wire_scissors>().CancelInvoke();
                 wire.GetComponent<Wire_scissors>().enabled = false;
+                wire.GetComponent<HingeJoint2D>().enabled = false;
                 gameManger.GetComponent<GameManger>().Win();
             }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Wire")
+        if (collision.gameObject.name == "Segmant (15)")
         {
             thereIsWire = true;
             wire = collision.gameObject;
@@ -44,7 +46,7 @@ public class Scissors_scissors : MonoBehaviour {
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Wire")
+        if (collision.gameObject.name == "Segmant (15)")
             thereIsWire = false;
     }
    
