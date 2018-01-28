@@ -40,13 +40,13 @@ public class FogGameManager : MonoBehaviour {
     //float currentCheckerTime;
 
     // Use this for initialization
-    IEnumerator Start () {
+    void Start () {
         //float r = (currColor.r / defaultColor.r);
         //float g = (currColor.g / defaultColor.g);
         //float b = (currColor.b / defaultColor.b);
         //print("r: " + r + " g: " + g + " b: " + b);
         //print((r + g + b) / 3);
-        yield return new WaitForSeconds(3);
+        //yield return new WaitForSeconds(3);
         StartTheGame();
         
     }
@@ -133,7 +133,8 @@ public class FogGameManager : MonoBehaviour {
         headRigBod.simulated = true;
         yield return new WaitForSeconds(1.5f);
         bloodSpray.Play();
-        
+        HazemUIMan.instance.ShowEndScreen(0);
+
     }
 
     IEnumerator WinTheGame(int totalScore)

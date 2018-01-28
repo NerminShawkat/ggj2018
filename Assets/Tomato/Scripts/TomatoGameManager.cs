@@ -39,9 +39,9 @@ public class TomatoGameManager : MonoBehaviour {
     public ParticleSystem bloodExplosion;
     public ParticleSystem bloodSpray;
     // Use this for initialization
-    IEnumerator Start () {
+    void Start () {
 
-        yield return new WaitForSeconds(3);
+        //yield return new WaitForSeconds(3);
         StartTheGame();
 	}
 	
@@ -93,6 +93,8 @@ public class TomatoGameManager : MonoBehaviour {
         yield return new WaitForSeconds(2);
         dentHeadDead.SetActive(true);
         dentHeadIdle.SetActive(false);
+        HazemUIMan.instance.ShowEndScreen(0);
+
     }
 
     IEnumerator WinTheGame()
@@ -102,6 +104,7 @@ public class TomatoGameManager : MonoBehaviour {
         bloodExplosion.Play();
         yield return new WaitForSeconds(1.2f);
         bloodSpray.Play();
+        HazemUIMan.instance.ShowEndScreen(0);
     }
 
     public void StartTheGame()

@@ -111,5 +111,7 @@ public class Flies_FliesLord : TheLord {
         {
             _OnGameOver.Invoke(true);
         }
+        PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
     }
 }

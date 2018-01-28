@@ -46,12 +46,15 @@ public class BotatoMan : MonoBehaviour {
     {
         if (collision.gameObject.name == "WindTornado")
         {
-            
             win_Lose = -1;
+            PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
         } else if (collision.gameObject.name == "Ground")
         {
             
             win_Lose = 1;
+            PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
         }
     }
 }

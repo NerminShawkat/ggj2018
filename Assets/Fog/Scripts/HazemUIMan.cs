@@ -20,6 +20,7 @@ public class HazemUIMan : MonoBehaviour {
     // Use this for initialization
     void Start () {
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 	
 	// Update is called once per frame
@@ -29,25 +30,31 @@ public class HazemUIMan : MonoBehaviour {
 
     public void ShowEndScreen(int currentScore)
     {
+        Debug.Log("here");
+        
+
         StartCoroutine(ScaleAnimated(finalPanelAnimCurve, finalPanelAnimTime, currentScore));
     }
 
     IEnumerator ScaleAnimated(AnimationCurve ac, float time, int currentScore)
     {
-        finalScore.text = playerTotalScore.ToString();
+        yield return new WaitForSeconds(2);
+        PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
+        //finalScore.text = playerTotalScore.ToString();
 
-        finalExtraScore.text = "+" + currentScore.ToString();
+        //finalExtraScore.text = "+" + currentScore.ToString();
 
-        float timer = 0.0f;
-        while (timer <= time)
-        {
-            mainPanel.transform.localScale = Vector3.LerpUnclamped(Vector3.zero, Vector3.one, ac.Evaluate(timer / time));
-            timer += Time.deltaTime;
-            yield return null;
-        }
+        //float timer = 0.0f;
+        //while (timer <= time)
+        //{
+        //    mainPanel.transform.localScale = Vector3.LerpUnclamped(Vector3.zero, Vector3.one, ac.Evaluate(timer / time));
+        //    timer += Time.deltaTime;
+        //    yield return null;
+        //}
 
-        StartCoroutine(AnimateScore(playerTotalScore, currentScore));
-        
+        //StartCoroutine(AnimateScore(playerTotalScore, currentScore));
+
     }
 
     IEnumerator AnimateScore(int currentScore, int extraScore)

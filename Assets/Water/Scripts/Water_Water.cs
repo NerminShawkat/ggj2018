@@ -71,6 +71,8 @@ public class Water_Water : TheLord {
         if(_moveToSurface && transform.position == _surfacePosition)
         {
             _reachedSurface = true;
+            PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
         }
     }
 
@@ -88,5 +90,10 @@ public class Water_Water : TheLord {
         _moveToSurface = _waterLevel > _minWaterLevel;
         _isGameOver = true;
         _OnGameOver.Invoke(_waterLevel <= _minWaterLevel);
+        if(!_moveToSurface)
+        {
+            PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
+        }
     }
 }

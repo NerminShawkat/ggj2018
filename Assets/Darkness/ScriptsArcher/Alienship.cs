@@ -17,11 +17,15 @@ public class Alienship : MonoBehaviour {
 	int _dificulty;
 	bool _isAlive;
 
-	float fullGameTime = 5f;
+	float fullGameTime = 6f;
 	float startGameTime = 0f;
 
 	Vector2 _worldSize;
 
+    void Awake()
+    {
+        startGameTime = Time.time;
+    }
 	// Use this for initialization
 	IEnumerator Start()
 	{
@@ -49,15 +53,17 @@ public class Alienship : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//filler.fillAmount = ((fullGameTime - (Time.time - startGameTime)) / fullGameTime);
+        filler.fillAmount = ((fullGameTime - (Time.time - startGameTime)) / fullGameTime);
 
-		//if (filler.fillAmount <= 0)
-		//{
-		//	print("done");
-		//	finished = true;
-		//	_isAlive = false;
-		//	pinkSfx.Stop();
-		//	//Time.timeScale = 0.01f;
-		//}
-	}
+        if (filler.fillAmount <= 0)
+        {
+            print("done");
+            finished = true;
+            _isAlive = false;
+            pinkSfx.Stop();
+            PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
+            //Time.timeScale = 0.01f;
+        }
+    }
 }

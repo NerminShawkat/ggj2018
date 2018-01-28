@@ -61,6 +61,8 @@ public class GameManger : MonoBehaviour {
                 wire.GetComponent<Wire_scissors>().enabled = false;
                 scissors.GetComponent<Scissors_scissors>().enabled = false;
                 win_Lose = -1;
+                PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+                UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
                 //Application.LoadLevel("");
             }
         }if (win_Lose == 1)
@@ -69,7 +71,9 @@ public class GameManger : MonoBehaviour {
             extraScore = (int)(timer /timerScale);
             extraScore *= gameScore;
             finalScore = gameScore + extraScore;
-           // Application.LoadLevel("");
+            PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
+            // Application.LoadLevel("");
         }
     }
     public void Win()

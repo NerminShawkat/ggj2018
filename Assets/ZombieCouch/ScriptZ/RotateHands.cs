@@ -12,6 +12,8 @@ public class RotateHands : MonoBehaviour {
 
 	Vector3 originalPos;
 
+    public int id;
+
 	[HideInInspector]
 	public bool lft, rit, caught, dead;
 
@@ -65,6 +67,8 @@ public class RotateHands : MonoBehaviour {
 				dead = true;
 				deadGuy.sprite = deadSprite;
 				ps.Play();
+
+                ZombieMan.instance.SomeoneDead(id);
 			}
 		}
 	}
