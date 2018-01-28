@@ -106,7 +106,7 @@ public class TomatoGameManager : MonoBehaviour {
 
     public void StartTheGame()
     {
-        remainingTimeImage.transform.parent.gameObject.SetActive(true);
+        //remainingTimeImage.transform.parent.gameObject.SetActive(true);
         newsObject.SetActive(false);
         int gameDifficulty = 1;//------ Get the difficulty 
         if (gameDifficulty > 6)

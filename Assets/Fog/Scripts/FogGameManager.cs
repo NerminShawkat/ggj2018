@@ -23,6 +23,15 @@ public class FogGameManager : MonoBehaviour {
     [Header("Game Options")]
     public H_GameState currentGameState;
     public GameObject dirstObject;
+
+    [Header("Win Objects")]
+    public GameObject winScreen;
+
+    [Header("Lose Objects")]
+    public GameObject loseScreen;
+    public ParticleSystem bloodSpray;
+    public Rigidbody2D headRigBod;
+
     //public CalculateColor colorCalculator;
     //public float winAccuracyRate;
     //public Color32 defaultColor;
@@ -51,6 +60,7 @@ public class FogGameManager : MonoBehaviour {
             if (currentTime <= 0)
             {
                 //---Stop he game and lose
+                StartCoroutine(LoseTheGame());
                 currentGameState = H_GameState.End;
                 return;
             }
@@ -106,9 +116,32 @@ public class FogGameManager : MonoBehaviour {
             currentGameState = H_GameState.End;
             dirstObject.SetActive(false);
             int extraScore = (int)(gameScore * (currentTime / maxTime));
+
+            StartCoroutine(WinTheGame(gameScore + extraScore));
+
             print(gameScore + "  " + extraScore);
-            HazemUIMan.instance.ShowEndScreen(gameScore + extraScore);
+            
             return;
         }
+    }
+
+
+    IEnumerator LoseTheGame()
+    {
+        loseScreen.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        headRigBod.simulated = true;
+        yield return new WaitForSeconds(1.5f);
+        bloodSpray.Play();
+        
+    }
+
+    IEnumerator WinTheGame(int totalScore)
+    {
+        //tomatoHeadPoision.SetActive(true);
+        winScreen.SetActive(true);
+        yield return new WaitForSeconds(2);
+
+        HazemUIMan.instance.ShowEndScreen(totalScore);
     }
 }
