@@ -22,6 +22,10 @@ public class GameManger : MonoBehaviour {
     {
         difficulty = PlayerPrefs.GetInt("difficulty");
         wire.GetComponent<Wire_scissors>().set_Defculty(difficulty);
+        if (difficulty < 1)
+        difficulty = 1;
+        if (difficulty > 6)
+            difficulty = 6;
         timer = 6f;
         timeText.text = timer.ToString("F");
         win_Lose = 0;
