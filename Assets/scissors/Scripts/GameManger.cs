@@ -10,6 +10,8 @@ public class GameManger : MonoBehaviour {
     public GameObject wire;
     public GameObject full_Wire;
     public GameObject scissors;
+    public GameObject aliveBG;
+    public GameObject DeadBG;
     //[HideInInspector]
     private int difficulty;
     [HideInInspector]
@@ -34,13 +36,15 @@ public class GameManger : MonoBehaviour {
         int randomChiled = Random.Range(1, full_Wire.transform.childCount-1);
         full_Wire.transform.GetChild(randomChiled).gameObject.AddComponent<BoxCollider2D>();
         full_Wire.transform.GetChild(randomChiled).gameObject.tag="Target";
-        //full_Wire.transform.GetChild(randomChiled).gameObject.GetComponent<SpriteRenderer>().sprite =;
+        full_Wire.transform.GetChild(randomChiled).gameObject.GetComponent<SpriteRenderer>().color =Color.white;
     }
     private void Start()
     {
         timer -= difficulty;
         timerScale = timer;
         gameScore = 100*difficulty;
+        aliveBG.active = true;
+        DeadBG.active = false;
     }
     private void Update()
     {
@@ -61,6 +65,8 @@ public class GameManger : MonoBehaviour {
                 wire.GetComponent<Wire_scissors>().enabled = false;
                 scissors.GetComponent<Scissors_scissors>().enabled = false;
                 win_Lose = -1;
+                aliveBG.active = false;
+                DeadBG.active = true;
                 //Application.LoadLevel("");
             }
         }if (win_Lose == 1)

@@ -11,6 +11,9 @@ public class BotatoMan : MonoBehaviour {
     private int difficulty;
     private int win_Lose;
     private int finalGameScore;
+    private int gravityStablizer;
+    public GameObject head;
+    public GameObject blood;
     private void Awake()
     {
         difficulty = PlayerPrefs.GetInt("difficulty");
@@ -26,14 +29,14 @@ public class BotatoMan : MonoBehaviour {
             difficulty = 1;
         if (difficulty > 5)
             difficulty = 5;
-
-        rigidbody2D.gravityScale = -1*difficulty;
+        rigidbody2D.gravityScale = 0;
         finalGameScore = 100 * difficulty;
+        gravityStablizer = 0;
     }
 
     private void FixedUpdate()
     {
-        float horizental = Input.GetAxis("Horizontal");
+        float horizental = gravityStablizer;
         if (horizental < 0)
             horizental *= -1;
         rigidbody2D.gravityScale += horizental * _sensitivity * difficulty;
@@ -48,10 +51,22 @@ public class BotatoMan : MonoBehaviour {
         {
             
             win_Lose = -1;
+            if (head != null)
+                head.active = false;
+            if (blood != null)
+                blood.active = true;
         } else if (collision.gameObject.name == "Ground")
         {
             
             win_Lose = 1;
         }
     }
+    public void Start_Rising()
+    {
+        rigidbody2D.gravityScale = -1 * difficulty;
+        this.GetComponent<Animator>().enabled = false;
+    }
+    public void click() { gravityStablizer = 1; }
+    public void release() { gravityStablizer = 0; }
+
 }
