@@ -50,15 +50,13 @@ public class BotatoMan : MonoBehaviour {
         if (collision.gameObject.name == "WindTornado")
         {
             win_Lose = -1;
-<<<<<<< HEAD
-            PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
-=======
+            
             if (head != null)
                 head.active = false;
             if (blood != null)
                 blood.active = true;
->>>>>>> f38f689eab6b2f3b020ce2377cfb657e458d2c0b
+            PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
         } else if (collision.gameObject.name == "Ground")
         {
             
@@ -69,7 +67,7 @@ public class BotatoMan : MonoBehaviour {
     }
     public void Start_Rising()
     {
-        rigidbody2D.gravityScale = -1 * difficulty;
+        rigidbody2D.gravityScale = -0.15f * difficulty;
         this.GetComponent<Animator>().enabled = false;
     }
     public void click() { gravityStablizer = 1; }

@@ -65,13 +65,11 @@ public class GameManger : MonoBehaviour {
                 wire.GetComponent<Wire_scissors>().enabled = false;
                 scissors.GetComponent<Scissors_scissors>().enabled = false;
                 win_Lose = -1;
-<<<<<<< HEAD
-                PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
-                UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
-=======
+
                 aliveBG.active = false;
                 DeadBG.active = true;
->>>>>>> f38f689eab6b2f3b020ce2377cfb657e458d2c0b
+                PlayerPrefs.SetInt("level", UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
+                UnityEngine.SceneManagement.SceneManager.LoadScene("loading");
                 //Application.LoadLevel("");
             }
         }if (win_Lose == 1)
