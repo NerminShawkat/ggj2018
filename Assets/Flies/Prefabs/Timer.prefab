@@ -79,7 +79,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: OnTimeUpHandler
+        m_MethodName: OnTimeoutOutHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -92,11 +92,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   _times:
-  - 10
-  - 9
-  - 8
-  - 7
-  - 6
+  - 4
+  - 4
+  - 4
+  - 3
+  - 2.5
+  - 2
 --- !u!114 &114226031172118200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,7 +145,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
 --- !u!222 &222818537231597682
 CanvasRenderer:
   m_ObjectHideFlags: 1

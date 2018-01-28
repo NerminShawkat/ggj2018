@@ -59,6 +59,7 @@ public class Flies_Swatter : MonoBehaviour {
 
     void OnGameOverHandler(bool win)
     {
+        Debug.Log("game over " + win);
         _isGameOver = true;
     }
 }
