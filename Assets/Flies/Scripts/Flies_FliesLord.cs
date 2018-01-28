@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
+using System.Collections.Generic;
+
 [System.Serializable]
 public class Range
 {
@@ -16,7 +16,6 @@ public class Range
         }
     }
 }
-
 
 public class OnGameOverEvent: UnityEvent<bool>
 {
@@ -90,7 +89,6 @@ public class Flies_FliesLord : TheLord {
     //        fly._targetPosition = pos;
     //        fly.Difficulty = _dificulty;
     //        fly.GetLarger();
-
     //        yield return new WaitForSeconds(_timeBetweenFlies[_dificulty].Value);
     //    }
     //}
