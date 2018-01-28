@@ -1,38 +1,53 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 
 public class PinkPanther : MonoBehaviour {
 
-	public Image filler;
+	public float Difficulty = 1f;
 
 	float fullGameTime = 5f;
+	float startGameTime = 0f;
 
-	float minSpeed = -4f;
-	float maxSpeed = 4f;
+	float startPointingTime = 0;
+	float hitTime = 0;
+	bool somethingHitMe = false;
+
+	float minSpeed = -3f;
+	float maxSpeed = 3f;
 
 	float waitTime = 1f;
-
-	float startGameTime = 0f;
 
 	Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
-		StartCoroutine(PickRandomDirection(0));
+		//StartCoroutine(PickRandomDirection(0));
 
 		startGameTime = Time.time;
 	}
 
 	void Update()
 	{
-		filler.fillAmount = ((fullGameTime - (Time.time - startGameTime)) / fullGameTime);
+		//filler.fillAmount = ((fullGameTime - (Time.time - startGameTime)) / fullGameTime);
 
-		if (filler.fillAmount <= 0)
+		//if (filler.fillAmount <= 0)
+		//{
+		//	print("done");
+		//	Time.timeScale = 0.01f;
+		//}
+
+		if (somethingHitMe)
 		{
-			print("done");
-			Time.timeScale = 0.01f;
+			//print("hit");
+			hitTime = Time.time - startGameTime;
+
+			if (hitTime >= 1f)
+			{
+				print("kill");
+				startPointingTime = hitTime = 0;
+				Destroy(gameObject);
+			}
 		}
 	}
 
@@ -93,6 +108,24 @@ public class PinkPanther : MonoBehaviour {
 		{
 			StartCoroutine(PickRandomDirection(0));
 			yield break;
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.name == "SpriteMask")
+		{
+			startPointingTime = Time.time;
+			somethingHitMe = true;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.gameObject.name == "SpriteMask")
+		{
+			startPointingTime = hitTime = 0;
+			somethingHitMe = false;
 		}
 	}
 }
