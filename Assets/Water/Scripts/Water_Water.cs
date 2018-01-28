@@ -76,7 +76,7 @@ public class Water_Water : TheLord {
 
     private void OnMouseExit()
     {
-        if (_isGameOver) return;
+        if (_isGameOver)  return;
         _mouseExit = true;
     }
 
